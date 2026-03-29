@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DesarrollAMO Footer Service</title>
+  <style>
+    /* ============================================
+       DesarrollAMO Footer Service
+       https://footerdesarrollamo.netlify.app
+       ============================================ */
+
+    :root {
+      --footer-bg: #0B1020;
+      --footer-text: #E8ECF7;
+      --footer-muted: #AAB3D3;
+      --footer-link: #7DD3FC;
+      --footer-border: rgba(125, 211, 252, 0.12);
+      --footer-credit-bg: transparent;
+    }
+
+    /* LIGHT THEME */
+    body.theme-light {
+      --footer-bg: #F0F0F0;
+      --footer-text: #1A1A2E;
+      --footer-muted: #5A5A7A;
+      --footer-link: #2196F3;
+      --footer-border: rgba(33, 150, 243, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: transparent;
+    }
+
+    /* --- FOOTER CONTAINER --- */
+    .da-footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 28px 20px 24px;
+      text-align: center;
+      line-height: 1.6;
+      width: 100%;
+      border-top: 1px solid var(--footer-border);
+    }
+
+    /* --- LOGO --- */
+    .da-footer__logo {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .da-footer__logo svg {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    /* --- BRAND NAME --- */
+    .da-footer__brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+
+    .da-footer__brand .da-desarroll { color: #79D7ED; }
+    .da-footer__brand .da-amo       { color: #E287B2; }
+
+    body.theme-light .da-footer__brand .da-desarroll { color: #2196F3; }
+    body.theme-light .da-footer__brand .da-amo       { color: #E287B2; }
+
+    /* --- CLIENT INFO --- */
+    .da-footer__client {
+      font-size: 0.82rem;
+      color: var(--footer-muted);
+      margin-bottom: 2px;
+    }
+
+    .da-footer__slogan {
+      font-size: 0.78rem;
+      color: var(--footer-muted);
+      margin-bottom: 10px;
+    }
+
+    /* --- SEPARATOR --- */
+    .da-footer__sep {
+      display: inline-block;
+      margin: 0 8px;
+      color: var(--footer-muted);
+    }
+
+    /* --- CREDIT LINE --- */
+    .da-footer__credit {
+      font-size: 0.75rem;
+      color: var(--footer-muted);
+      margin-bottom: 10px;
+    }
+
+    /* --- LINK --- */
+    .da-footer__link {
+      display: inline-block;
+      color: var(--footer-link);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      transition: opacity 0.2s ease;
+    }
+
+    .da-footer__link:hover {
+      opacity: 0.75;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 480px) {
+      .da-footer {
+        padding: 22px 14px 18px;
+      }
+      .da-footer__logo svg {
+        height: 38px;
+      }
+      .da-footer__brand {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <footer class="da-footer" id="da-footer">
+    <!-- Logo SVG: 3 pirámides + sol -->
+    <div class="da-footer__logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 36" width="120" height="36">
+        <!-- Pirámide 1 (izquierda, celeste) -->
+        <polygon points="8,28 16,10 24,28" fill="#79D7ED"/>
+        <!-- Pirámide 2 (centro, rosa) -->
+        <polygon points="14,28 26,5 38,28" fill="#E287B2"/>
+        <!-- Pirámide 3 (derecha, rosa) -->
+        <polygon points="30,28 38,16 46,28" fill="#E287B2"/>
+        <!-- Sol (círculo dorado) -->
+        <circle cx="42" cy="14" r="6" fill="#F2B077"/>
+        <!-- Texto: Desarroll (celeste) -->
+        <text x="54" y="26" font-family="'Segoe UI', system-ui, sans-serif"
+              font-size="15" font-weight="700" fill="#79D7ED" letter-spacing="0.3">Desarroll</text>
+        <!-- Texto: AMO (rosa) -->
+        <text x="120" y="26" font-family="'Segoe UI', system-ui, sans-serif"
+              font-size="15" font-weight="700" fill="#E287B2" letter-spacing="0.3"
+              text-anchor="end">AMO</text>
+      </svg>
+    </div>
+
+    <!-- Client name -->
+    <div class="da-footer__brand">
+      <span class="da-desarroll">Desarroll</span><span class="da-amo">AMO</span>
+    </div>
+
+    <div class="da-footer__client" id="da-client"></div>
+    <div class="da-footer__slogan" id="da-slogan"></div>
+
+    <div class="da-footer__credit">
+      <span id="da-credit-text">Desarrollado por</span>
+      <span class="da-footer__sep">·</span>
+      <a class="da-footer__link" id="da-link" href="https://desarrollamo.netlify.app/" target="_blank" rel="noopener noreferrer">
+        DesarrollAMO
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // --- CONFIGURACIÓN POR SITE ---
+      // Agregar nuevos sitios aquí:
+      const SITE_CONFIG = {
+        'casaboscoarq.com.ar': {
+          name: 'CasaBosco',
+          slogan: 'Arquitectura & Diseño',
+          theme: 'light'
+        },
+        'coviat.com.ar': {
+          name: 'Coviat',
+          slogan: '',
+          theme: 'light'
+        },
+        'remeraco.netlify.app': {
+          name: 'Remeraco',
+          slogan: '',
+          theme: 'dark'
+        },
+        'cobramo.netlify.app': {
+          name: 'Cobramo',
+          slogan: '',
+          theme: 'dark'
+        },
+        'desarrollamo.netlify.app': {
+          name: 'DesarrollAMO',
+          slogan: 'IA para todos',
+          theme: 'dark'
+        }
+      };
+
+      // --- DETECT SITE FROM REFERRER OR HOST ---
+      var host = document.location.hostname;
+      var referrer = document.referrer || '';
+      var siteKey = referrer.split('/')[2] || host;
+
+      // Params override
+      var params = {};
+      try {
+        var search = document.location.search.substring(1);
+        search.split('&').forEach(function(pair) {
+          var kv = pair.split('=');
+          params[decodeURIComponent(kv[0])] = kv[1] ? decodeURIComponent(kv[1]) : true;
+        });
+      } catch(e) {}
+
+      // --- RESOLVE CONFIG ---
+      var config = SITE_CONFIG[siteKey] || SITE_CONFIG[host] || { theme: 'dark' };
+
+      // Params override config
+      if (params.name)    config.name    = decodeURIComponent(params.name);
+      if (params.slogan)  config.slogan  = decodeURIComponent(params.slogan);
+      if (params.theme)   config.theme   = params.theme;
+      if (params.credit)  config.credit  = decodeURIComponent(params.credit);
+      if (params.link)    document.getElementById('da-link').href = decodeURIComponent(params.link);
+
+      // --- APPLY THEME ---
+      if (config.theme === 'light') {
+        document.body.classList.add('theme-light');
+      }
+
+      // --- FILL CONTENT ---
+      var year = new Date().getFullYear();
+      var clientEl = document.getElementById('da-client');
+      var sloganEl = document.getElementById('da-slogan');
+      var creditEl = document.getElementById('da-credit-text');
+
+      if (config.name) {
+        clientEl.textContent = '© ' + year + ' ' + config.name;
+      } else {
+        clientEl.textContent = '© ' + year + ' DesarrollAMO';
+      }
+
+      if (config.slogan) {
+        sloganEl.textContent = config.slogan;
+      } else {
+        sloganEl.style.display = 'none';
+      }
+
+      if (config.credit) {
+        creditEl.textContent = config.credit;
+      }
+    })();
+  </script>
+</body>
+</html>
