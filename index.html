@@ -11,6 +11,9 @@
       --muted: #AAB3D3;
       --link: #79D7ED;
       --border: rgba(125, 211, 252, 0.12);
+      --py1: #79D7ED;
+      --py2: #E287B2;
+      --sun: #F2B077;
     }
     body.theme-light {
       --bg: #F0F0F0;
@@ -32,20 +35,48 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Logo + brand name side by side */
-    .da-footer__header {
+    .da-footer__inner { display: inline-block; }
+
+    .da-footer__logo-row {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 8px;
     }
 
-    .da-footer__logo svg {
-      height: 36px;
-      width: auto;
-      display: block;
-      flex-shrink: 0;
+    /* Pirámides CSS */
+    .da-footer__pyramids {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 32px;
+    }
+    .da-footer__py1 {
+      width: 0; height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 20px solid var(--py1);
+    }
+    .da-footer__py2 {
+      width: 0; height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 28px solid var(--py2);
+    }
+    .da-footer__py3 {
+      width: 0; height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 16px solid var(--py2);
+    }
+    .da-footer__sun {
+      width: 12px;
+      height: 12px;
+      background: var(--sun);
+      border-radius: 50%;
+      margin-bottom: 4px;
+      margin-left: 1px;
     }
 
     .da-footer__brand {
@@ -56,6 +87,7 @@
     }
     .da-footer__brand .da-d { color: var(--link); }
     .da-footer__brand .da-a { color: #E287B2; }
+    body.theme-light .da-footer__brand .da-d { color: var(--link); }
 
     .da-footer__client {
       font-size: 0.8rem;
@@ -79,58 +111,52 @@
       text-decoration: none;
       font-weight: 500;
     }
-
     .da-footer__link:hover { opacity: 0.75; }
 
     @media (max-width: 400px) {
-      .da-footer__header { flex-direction: column; gap: 6px; }
+      .da-footer__logo-row { flex-direction: column; align-items: center; gap: 6px; }
       .da-footer { padding: 20px 14px 16px; }
     }
   </style>
 </head>
 <body>
   <footer class="da-footer" id="da-footer">
+    <div class="da-footer__inner">
 
-    <!-- Logo + brand inline -->
-    <div class="da-footer__header">
-      <div class="da-footer__logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 28" width="88" height="28">
-          <!-- 3 pirámides -->
-          <polygon points="6,22 12,8 18,22" fill="#79D7ED"/>
-          <polygon points="10,22 18,4 26,22" fill="#E287B2"/>
-          <polygon points="22,22 28,12 34,22" fill="#E287B2"/>
-          <!-- Sol -->
-          <circle cx="32" cy="11" r="5" fill="#F2B077"/>
-          <!-- Texto: Desarroll + AMO -->
-          <text x="40" y="19"
-                font-family="'Segoe UI',system-ui,sans-serif"
-                font-size="13" font-weight="700" letter-spacing="0.3">
-            <tspan fill="#79D7ED">Desarroll</tspan><tspan fill="#E287B2">AMO</tspan>
-          </text>
-        </svg>
+      <div class="da-footer__logo-row">
+        <div class="da-footer__pyramids">
+          <div class="da-footer__py1"></div>
+          <div class="da-footer__py2"></div>
+          <div class="da-footer__py3"></div>
+          <div class="da-footer__sun"></div>
+        </div>
+        <div class="da-footer__brand">
+          <span class="da-d">Desarroll</span><span class="da-a">AMO</span>
+        </div>
       </div>
-    </div>
 
-    <div class="da-footer__client" id="da-client"></div>
-    <div class="da-footer__slogan" id="da-slogan"></div>
-    <div class="da-footer__credit">
-      <span id="da-credit-text">Desarrollado por</span>
-      <span> · </span>
-      <a class="da-footer__link" id="da-link" href="https://desarrollamo.netlify.app/" target="_blank" rel="noopener noreferrer">DesarrollAMO</a>
+      <div class="da-footer__client" id="da-client"></div>
+      <div class="da-footer__slogan" id="da-slogan"></div>
+      <div class="da-footer__credit">
+        <span id="da-credit-text">Desarrollado por</span>
+        <span> · </span>
+        <a class="da-footer__link" id="da-link" href="https://desarrollamo.netlify.app/" target="_blank" rel="noopener noreferrer">DesarrollAMO</a>
+      </div>
+
     </div>
   </footer>
 
   <script>
     (function() {
       var SITE_CONFIG = {
-        'casaboscoarq.com.ar':  { name: 'CasaBosco',    slogan: 'Arquitectura & Diseño', theme: 'light' },
-        'coviat.com.ar':        { name: 'Coviat',       slogan: '',                      theme: 'light' },
-        'remeraco.netlify.app': { name: 'Remeraco',     slogan: '',                      theme: 'dark'  },
-        'cobramo.netlify.app':  { name: 'Cobramo',      slogan: '',                      theme: 'dark'  },
-        'desarrollamo.netlify.app': { name: 'DesarrollAMO', slogan: 'IA para todos',     theme: 'dark'  }
+        'casaboscoarq.com.ar':      { name: 'CasaBosco',              slogan: 'Arquitectura & Diseño', theme: 'light' },
+        'coviat.com.ar':            { name: 'Coviat',                  slogan: '',                      theme: 'light' },
+        'remeraco.netlify.app':     { name: 'Remeraco',                slogan: '',                      theme: 'dark'  },
+        'cobramo.netlify.app':      { name: 'Cobramo',                 slogan: '',                      theme: 'dark'  },
+        'desarrollamo.netlify.app': { name: 'DesarrollAMO',            slogan: 'IA para todos',         theme: 'dark'  }
       };
 
-      var host   = document.location.hostname;
+      var host = document.location.hostname;
       var params = {};
       try {
         document.location.search.substring(1).split('&').forEach(function(p) {
